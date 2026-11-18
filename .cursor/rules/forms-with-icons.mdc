@@ -1,0 +1,15 @@
+---
+description: Formularios con iconos Tabler.
+globs: resources/views/**/*.blade.php
+alwaysApply: false
+---
+
+# Formularios
+
+Usa `x-form.input` (`name`, `label`, `type`, `icon`, `value`, `required`, `help`).
+
+Icono por defecto `ti ti-forms`. El componente pinta `old()` y el error.
+
+Un `<select>` no entra en el componente: `input-icon` + `form-select` + `@error`.
+
+Cada botón lleva icono a la izquierda.

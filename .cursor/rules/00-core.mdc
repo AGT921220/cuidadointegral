@@ -1,0 +1,43 @@
+---
+description: Reglas core de Cuidado Integral. Aplican antes de implementar.
+alwaysApply: true
+---
+
+# Core
+
+El repositorio es la fuente de verdad. El código reciente que cumple estas reglas tiene prioridad sobre un patrón genérico de Laravel. Lo que las viole no es plantilla.
+
+## Antes de implementar
+
+1. Identifica el módulo.
+2. Lee la regla `.cursor/rules` de ese módulo.
+3. Busca una implementación equivalente en este repo. CRUD y DataTables: usuarios y roles.
+4. Consulta `docs/AI_PROJECT_CONTEXT.md` y `docs/AI_DEVELOPMENT_GUIDE.md`.
+5. Reutiliza `BuilderFilter`, `BanHttp`, `PermissionTypes` y FormRequests.
+6. No abras una segunda forma de resolver algo que ya tiene patrón.
+
+## Procedimiento
+
+Comprender → módulo → regla → código similar → modelo/migración → cambio mínimo → tests → permisos → cola si aplica → Vite si hay JS → docs solo si cambió arquitectura, dominio, colas, Docker, API o permisos.
+
+## No hacer
+
+- Inventar arquitectura, columnas o módulos.
+- Repository, Policies, API Resources, `/api/v1`.
+- React, Vue, Livewire, Inertia o Tailwind como sistema visual del panel.
+- `env()` en `app/`. `migrate:fresh` sin petición explícita.
+- Exponer secretos.
+- Acomplejar. Evitar `else`. SOLID sin capas extra.
+
+## Dónde vive qué
+
+| Qué | Dónde |
+| --- | --- |
+| Páginas | `app/Http/Controllers/Dashboard` |
+| DataTables | `app/Http/Controllers/Admin` |
+| API móvil | `app/Http/Controllers/Api` |
+| Negocio | `app/Features/{Modulo}/Application` |
+| Validación | `app/Http/Requests/Admin` |
+| Jobs | `app/Features/{Modulo}/Jobs` |
+| Scheduler | `routes/console.php` |
+| Permisos | `PermissionTypes` + `PermissionHandler` + `roles:create` |

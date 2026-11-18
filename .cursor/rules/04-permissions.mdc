@@ -1,0 +1,20 @@
+---
+description: Permisos Spatie y roles Admin y Usuario.
+globs: app/Features/Permissions/**/*.php,app/Console/Commands/*.php,app/Http/Requests/**/*.php,resources/views/**/*.blade.php
+alwaysApply: false
+---
+
+# Permisos
+
+Spatie, guard `web`. No hay Policies. Las rutas no usan middleware `permission:`.
+
+1. Constante `{modulo}.{accion}` en `PermissionTypes`.
+2. Incluirla en `PermissionHandler` (lista, español y módulo).
+3. Asignarla en `CreateRolesCommand` si le toca al rol `Admin`.
+4. `authorize()` del FormRequest y `$this->authorize()` en el controller.
+5. `@can` en menú y botones.
+6. `docker exec php-cint php artisan permissions:create` y `roles:create`.
+
+Roles fijos: `Admin` (todos los permisos) y `Usuario` (app, sin permisos de panel). No se eliminan. `Admin` no se edita. El nombre de `Usuario` no cambia.
+
+El login web exige `dashboard.view`. El login móvil exige rol `Admin` o `Usuario`.

@@ -1,0 +1,17 @@
+---
+description: Módulo de roles y permisos del panel.
+globs: app/Features/Roles/**/*.php,app/Http/Controllers/**/Role*.php,app/Http/Requests/Admin/*RoleRequest.php,resources/views/roles/**/*.blade.php,resources/js/modules/roles/**/*.js
+alwaysApply: false
+---
+
+# Roles
+
+Modelo Spatie `Role`, guard `web`. No hay tabla de roles propia.
+
+- Crear sincroniza permisos que existan en `PermissionTypes`.
+- `Admin` no se edita ni se elimina.
+- `Usuario` no se elimina y su nombre no cambia. Sus permisos sí se pueden ajustar.
+- Un rol con usuarios asignados no se elimina.
+- Orden del headers: `roles.id`, `roles.name`.
+
+Referencia: `Dashboard\RoleController`, `UpdateRole`, `DeleteRole`.

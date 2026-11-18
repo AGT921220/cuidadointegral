@@ -1,0 +1,13 @@
+---
+description: PHPUnit de Cuidado Integral.
+globs: tests/**/*.php,phpunit.xml
+alwaysApply: false
+---
+
+# Tests
+
+- Feature + Unit. `RefreshDatabase`.
+- `phpunit.xml`: sqlite `:memory:`, `QUEUE_CONNECTION=sync`, cache y sesión `array`.
+- Helper: `Tests\Concerns\InteractsWithPermissions`.
+- CRUD mínimo: index 200, 403, store, update, destroy, headers JSON (`draw`, `recordsTotal`, `data`).
+- Correr: `docker exec php-cint php artisan test`.

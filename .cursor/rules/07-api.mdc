@@ -1,0 +1,19 @@
+---
+description: API móvil con Sanctum.
+globs: routes/api.php,app/Http/Controllers/Api/**/*.php,app/Features/Auth/**/*.php
+alwaysApply: false
+---
+
+# API
+
+Prefijo `/api`. Token Bearer. Sin API Resources y sin `/api/v1`.
+
+| Método | Ruta | Auth |
+| --- | --- | --- |
+| POST | `/api/auth/login` | público. `nickname`, `password`, `device_name` |
+| POST | `/api/auth/logout` | `auth:sanctum` |
+| GET | `/api/auth/user` y `/api/user` | `auth:sanctum` |
+
+Login: `AuthenticateMobileUser`. Respuesta `{ token_type, token, user }`. `user` no incluye el password.
+
+Solo entran roles `Admin` y `Usuario`. El nickname se compara en minúsculas.

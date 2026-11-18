@@ -1,0 +1,21 @@
+---
+description: CRUD nuevo en web.php. Plantilla usuarios.
+globs: routes/web.php,app/Http/Controllers/Dashboard/**/*.php,app/Features/**/Application/*.php,resources/views/**/*.blade.php
+alwaysApply: false
+---
+
+# CRUD
+
+Dentro del grupo `auth` de `routes/web.php`:
+
+```php
+Route::get('user-headers', [UserHeadersController::class, 'index'])->name('user-headers.index');
+Route::resource('users', UserController::class)->except(['show']);
+```
+
+- Dashboard: index sin filas, create, store, edit, update, destroy.
+- Feature: `Create`, `Update`, `Delete`, `SearchHeaders`.
+- `Store` y `Update` Request con `authorize()` y `attributes()` en español.
+- Vistas `index`, `create`, `edit`, `_form`.
+- Permisos `{entities}.view|create|update|delete`.
+- Solo campos reales del modelo.

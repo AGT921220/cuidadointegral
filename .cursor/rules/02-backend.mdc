@@ -1,0 +1,18 @@
+---
+description: Estilo PHP de controllers, Features y FormRequests.
+globs: app/**/*.php
+alwaysApply: false
+---
+
+# Backend
+
+- `final class` en Application, FormRequests y controllers nuevos.
+- Constructor con promoción y `private readonly`.
+- Return types siempre.
+- Caso de uso: `__invoke`. Nombres: `CreateX`, `UpdateX`, `DeleteX`, `SearchXHeaders`.
+- Persistencia con Eloquent. `DB::transaction` solo cuando hay varios writes.
+- Regla de estado (no borrarte a ti mismo, no borrar el rol Admin): `ValidationException` dentro de la Feature.
+- `$fillable` explícito. Password con cast `hashed`.
+- Sin `else` anidado. Guard clause y return.
+
+Referencia: `CreateUser`, `StoreUserRequest`, `Dashboard\UserController`.

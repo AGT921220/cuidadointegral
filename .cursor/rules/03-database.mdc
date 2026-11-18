@@ -1,0 +1,14 @@
+---
+description: Migraciones, modelos y factories.
+globs: database/**/*.php,app/Models/**/*.php
+alwaysApply: false
+---
+
+# Base de datos
+
+- Migraciones Laravel. MySQL `utf8mb4_unicode_ci` en Docker.
+- `users`: `nickname` único, soft deletes. No inventes columnas.
+- Tablas de framework: cache, jobs, sessions, permisos Spatie, `personal_access_tokens`.
+- Factory por modelo de CRUD.
+- Tests usan sqlite `:memory:`. No dependen de Redis.
+- No corras migraciones salvo que el prompt lo pida. El setup local está en el README.

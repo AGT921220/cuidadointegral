@@ -1,0 +1,8 @@
+@import '@tabler/core/dist/css/tabler.min.css';
+@import '@tabler/icons-webfont/dist/tabler-icons.min.css';
+@import './components/loader.css';
+
+html,
+body {
+    min-height: 100%;
+}

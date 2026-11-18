@@ -1,0 +1,16 @@
+---
+description: Capas y rutas de Cuidado Integral.
+globs: app/**/*.php,routes/**/*.php,bootstrap/app.php
+alwaysApply: false
+---
+
+# Arquitectura
+
+- Feature invocable en `app/Features/{Modulo}/Application`.
+- Controller: autoriza, valida con FormRequest, llama la Feature, responde.
+- `routes/web.php` (grupo `auth`): páginas y headers.
+- `routes/api.php`: Sanctum. Prefijo `/api`.
+- `routes/admin.php` se carga y permanece vacío.
+- `routes/console.php`: Schedule. El trabajo pesado se despacha a Redis.
+
+Referencias: `Dashboard\UserController`, `Admin\UserHeadersController`, `Api\Auth\LoginController`.

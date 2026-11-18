@@ -1,0 +1,15 @@
+---
+description: Horizon, Redis y scheduler.
+globs: app/**/Jobs/**/*.php,config/horizon.php,routes/console.php
+alwaysApply: false
+---
+
+# Colas
+
+- `QUEUE_CONNECTION=redis`. Horizon en `/horizon`, gate `viewHorizon` solo rol `Admin`.
+- Supervisor: colas `default` y `notifications`. `balance: auto`, `tries: 1`, `timeout: 60`. Local 3 procesos, producción 10.
+- Job: `ShouldQueue`, IDs o valores primitivos en el constructor, dependencias en `handle()`.
+- Cola de notificaciones: `onQueue('notifications')`.
+- Una cola nueva se agrega en `config/horizon.php` y se recarga con `horizon:terminate`.
+- Tests fuerzan `QUEUE_CONNECTION=sync`.
+- No uses `queue:work` mientras Horizon está corriendo.

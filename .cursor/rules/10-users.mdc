@@ -1,0 +1,18 @@
+---
+description: Módulo de usuarios del panel y de la app.
+globs: app/Features/Users/**/*.php,app/Http/Controllers/**/User*.php,app/Http/Requests/Admin/*UserRequest.php,resources/views/users/**/*.blade.php,resources/js/modules/users/**/*.js
+alwaysApply: false
+---
+
+# Usuarios
+
+Campos: `name`, `nickname`, `email`, `password`. Roles por `syncRoles`.
+
+- `nickname` único, `alpha_dash`, se guarda en minúsculas.
+- Alta: password obligatorio, mínimo 8, confirmado.
+- Edición: password vacío no cambia el hash.
+- No puedes eliminar tu propio usuario. El borrado es soft delete y revoca tokens.
+- El index no lista eliminados.
+- Orden del headers: `users.id`, `users.name`, `users.nickname`, `users.email`.
+
+Referencia: `Dashboard\UserController`, `SearchUserHeaders`, `users/index.blade.php`.

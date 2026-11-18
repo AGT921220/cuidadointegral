@@ -1,0 +1,23 @@
+---
+description: Docker local y staging.
+globs: Dockerfile,docker-compose*.yml,docker-compose*.yaml,docker/**/*,Makefile
+alwaysApply: false
+---
+
+# Docker
+
+Un `Dockerfile` `php:8.4-fpm`. Xdebug solo en el servicio `php` local.
+
+Local (`docker-compose.yml`): nginx, php, horizon, scheduler, mysql 8.4, redis 8, phpMyAdmin. Red `appnetwork`. MySQL y Redis con healthcheck.
+
+Dentro de la red: `DB_HOST=mysql`, `REDIS_HOST=redis`, `QUEUE_CONNECTION=redis`.
+
+Contenedores: `php-cint`, `nginx-cint`, `horizon-cint`, `scheduler-cint`, `mysql-cint`, `redis-cint`, `pma-cint`.
+
+Puertos de host por defecto: nginx `8094`, MySQL `4334`, Redis `6384`, phpMyAdmin `8095`.
+
+Staging (`docker-compose-staging.yaml`): sin MySQL ni phpMyAdmin, red `appnetwork` externa, Xdebug apagado, `restart: always`.
+
+Nginx hace FastCGI a `php-cint:9000`. Niega `/.env`.
+
+`make up`, `make install`, `make enter`, `make clear` (incluye `horizon:terminate`).

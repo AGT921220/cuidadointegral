@@ -1,0 +1,15 @@
+---
+description: Panel Tabler, BanHttp y Vite.
+globs: resources/**/*.{js,css,blade.php},vite.config.js
+alwaysApply: false
+---
+
+# Frontend
+
+- Layout `resources/views/layouts/app.blade.php`. Menú en `partials/dashboard/header.blade.php`.
+- Formularios: `x-form.input` e iconos `ti ti-*`. Selects a mano con `input-icon`.
+- Botones: Guardar `ti ti-device-floppy`, Cancelar `ti ti-x`, Volver `ti ti-arrow-left`, Nuevo `ti ti-plus`.
+- HTTP del panel: `window.BanHttp` (`get`, `post`, `put`) en `resources/js/admin.js`.
+- El DataTable del index usa `fetch` same-origin, no axios suelto.
+- `app.js` carga Tabler y `admin.js`. El JS de cada módulo va en `@push('scripts')` y en `vite.config.js`.
+- UI en español.

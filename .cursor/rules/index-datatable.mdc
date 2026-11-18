@@ -1,0 +1,25 @@
+---
+description: Index DataTable server-side. Plantilla usuarios y roles.
+globs: resources/views/**/index.blade.php,resources/js/modules/**/index.js,app/Http/Controllers/Admin/**/*HeadersController.php,app/Features/**/Search*Headers.php
+alwaysApply: false
+---
+
+# Index DataTable
+
+Copia la forma de usuarios o roles. Crea JS y tabla propios. No reutilices el id de otra tabla.
+
+## Vista
+
+Card + `#entidad-table` + `data-url` al headers + `<tbody>` vacío. Sin `@forelse`.
+
+## JS
+
+`resources/js/modules/{entidad}/index.js`: `createDataTable`, columnas con `data` y `name` SQL real, `fetch` con `offset`, `limit`, `draw`, `order_by`, `order_direction`. Callback `{ draw, recordsTotal, recordsFiltered, data }`. Las acciones (editar y DELETE con CSRF) se arman en el JS.
+
+Regístralo en `vite.config.js`.
+
+## Backend
+
+`Admin\{Entity}HeadersController`: autoriza `view`, lee offset/limit/draw y solo ordena columnas de una lista blanca.
+
+`Search{Entity}Headers` usa `BuilderFilter::paginate`.

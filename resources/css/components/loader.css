@@ -1,0 +1,27 @@
+.global-loader {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background: rgba(24, 36, 51, 0.35);
+    opacity: 0;
+    visibility: hidden;
+}
+
+.global-loader.is-visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.global-loader-content {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-width: 180px;
+    padding: 1rem 1.25rem;
+    background: #fff;
+    border-radius: 0.5rem;
+}
