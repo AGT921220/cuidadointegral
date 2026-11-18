@@ -20,14 +20,16 @@ class CreateRolesCommand extends Command
     ): int {
         $permissionRegistrar->forgetCachedPermissions();
 
-        $admin = Role::findOrCreate(RoleTypes::ADMIN, 'web');
-        $admin->syncPermissions($permissionHandler->getAllPermissions());
+        foreach ([RoleTypes::ADMIN, RoleTypes::CUIDADOR, RoleTypes::FAMILIAR, RoleTypes::SUPERVISOR] as $roleName) {
+            $role = Role::findOrCreate($roleName, 'web');
+            $role->syncPermissions($permissionHandler->permissionsForRole($roleName));
+        }
 
         Role::findOrCreate(RoleTypes::USUARIO, 'web');
 
         $permissionRegistrar->forgetCachedPermissions();
 
-        $this->components->info('Roles Admin y Usuario listos.');
+        $this->components->info('Roles Admin, Cuidador, Familiar, Supervisor y Usuario listos.');
 
         return self::SUCCESS;
     }

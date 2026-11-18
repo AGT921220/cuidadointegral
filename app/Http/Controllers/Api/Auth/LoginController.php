@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Api\Auth;
 
-use App\Features\Auth\Application\AuthenticateMobileUser;
 use App\Features\Auth\Application\AuthenticatedUserPayload;
+use App\Features\Auth\Application\AuthenticateMobileUser;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

@@ -23,7 +23,7 @@ final class AuthenticateMobileUser
             ]);
         }
 
-        if (! $user->hasAnyRole([RoleTypes::ADMIN, RoleTypes::USUARIO])) {
+        if (! $user->hasAnyRole(RoleTypes::mobile())) {
             throw ValidationException::withMessages([
                 'nickname' => ['Este usuario no puede entrar a la aplicación.'],
             ]);

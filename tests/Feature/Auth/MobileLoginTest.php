@@ -35,6 +35,24 @@ class MobileLoginTest extends TestCase
         $this->assertNotEmpty($response->json('token'));
     }
 
+    public function test_a_caregiver_can_log_in(): void
+    {
+        Role::findOrCreate(RoleTypes::CUIDADOR, 'web');
+
+        $user = User::factory()->create([
+            'nickname' => 'cuidador',
+            'password' => 'password',
+        ]);
+        $user->assignRole(RoleTypes::CUIDADOR);
+
+        $this->postJson('/api/auth/login', [
+            'nickname' => 'cuidador',
+            'password' => 'password',
+            'device_name' => 'pixel',
+        ])->assertOk()
+            ->assertJsonPath('user.nickname', 'cuidador');
+    }
+
     public function test_mobile_login_requires_device_name(): void
     {
         $this->postJson('/api/auth/login', [

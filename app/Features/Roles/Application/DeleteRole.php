@@ -10,7 +10,7 @@ final class DeleteRole
 {
     public function __invoke(Role $role): void
     {
-        if (in_array($role->name, [RoleTypes::ADMIN, RoleTypes::USUARIO], true)) {
+        if (in_array($role->name, RoleTypes::fixedNames(), true)) {
             throw ValidationException::withMessages([
                 'role' => 'Este rol del sistema no se puede eliminar.',
             ]);

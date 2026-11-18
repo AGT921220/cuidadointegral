@@ -10,11 +10,11 @@ Spatie, guard `web`. No hay Policies. Las rutas no usan middleware `permission:`
 
 1. Constante `{modulo}.{accion}` en `PermissionTypes`.
 2. Incluirla en `PermissionHandler` (lista, español y módulo).
-3. Asignarla en `CreateRolesCommand` si le toca al rol `Admin`.
+3. Asignarla en `PermissionHandler::permissionsForRole` si le toca a Admin, Cuidador, Familiar o Supervisor.
 4. `authorize()` del FormRequest y `$this->authorize()` en el controller.
 5. `@can` en menú y botones.
 6. `docker exec php-cint php artisan permissions:create` y `roles:create`.
 
-Roles fijos: `Admin` (todos los permisos) y `Usuario` (app, sin permisos de panel). No se eliminan. `Admin` no se edita. El nombre de `Usuario` no cambia.
+Roles fijos: `Admin` (todos los permisos), `Usuario` (app, sin permisos de panel), `Cuidador`, `Familiar` y `Supervisor`. No se eliminan ni se renombran. `Admin` no se edita. `roles:create` vuelve a sincronizar los permisos de Admin y de los tres roles de cuidado. No toca los permisos manuales de `Usuario`.
 
-El login web exige `dashboard.view`. El login móvil exige rol `Admin` o `Usuario`.
+El login web exige `dashboard.view`. El login móvil exige un rol de `RoleTypes::mobile()`.

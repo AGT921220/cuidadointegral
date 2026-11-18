@@ -16,4 +16,28 @@ Prefijo `/api`. Token Bearer. Sin API Resources y sin `/api/v1`.
 
 Login: `AuthenticateMobileUser`. Respuesta `{ token_type, token, user }`. `user` no incluye el password.
 
-Solo entran roles `Admin` y `Usuario`. El nickname se compara en minúsculas.
+Entran los roles de `RoleTypes::mobile()`: Admin, Usuario, Cuidador, Familiar y Supervisor. El nickname se compara en minúsculas.
+
+El cuidado responde `{ data }` o `{ data, meta: { total, limit, offset } }`. Valida en el controller. Autoriza el permiso y después la Feature recorta por asignación.
+
+| Método | Ruta | Permiso |
+| --- | --- | --- |
+| GET | `/api/shifts` | `shifts.view` |
+| GET | `/api/shifts/{shift}` | `shifts.view` |
+| POST | `/api/shifts/{shift}/check-in` | `shifts.check_in` |
+| POST | `/api/shifts/{shift}/check-out` | `shifts.check_out` |
+| POST | `/api/shifts/{shift}/locations` | `shift_locations.create` |
+| GET | `/api/patients/{patient}` | `patients.view` |
+| GET | `/api/shifts/{shift}/tasks` | `care_tasks.view` |
+| POST | `/api/shifts/{shift}/tasks/{careTask}/records` | `care_tasks.record` |
+| GET/POST | `/api/shifts/{shift}/logs` | `care_logs.view` / `care_logs.create` |
+| PUT | `/api/care-logs/{careLog}` | `care_logs.create` y ser el autor, o Admin |
+| GET/POST | `/api/shifts/{shift}/health-records` | `health_records.view` / `health_records.create` |
+| POST | `/api/shifts/{shift}/incidents` | `incidents.create` |
+| GET | `/api/incidents/{incident}` | `incidents.view` |
+| POST | `/api/incidents/{incident}/events` | `incidents.update` y vínculo supervisor, o Admin |
+| GET | `/api/reports` | `reports.view` |
+| POST | `/api/patients` | `patients.create` |
+| POST | `/api/patients/{patient}/links` | `patient_links.create` |
+| POST | `/api/shifts` | `shifts.create` |
+| POST | `/api/care-tasks` | `care_tasks.create` |

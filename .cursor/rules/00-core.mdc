@@ -37,7 +37,7 @@ Comprender → módulo → regla → código similar → modelo/migración → c
 | DataTables | `app/Http/Controllers/Admin` |
 | API móvil | `app/Http/Controllers/Api` |
 | Negocio | `app/Features/{Modulo}/Application` |
-| Validación | `app/Http/Requests/Admin` |
+| Validación | FormRequest en el panel. `$request->validate` en la API |
 | Jobs | `app/Features/{Modulo}/Jobs` |
 | Scheduler | `routes/console.php` |
 | Permisos | `PermissionTypes` + `PermissionHandler` + `roles:create` |

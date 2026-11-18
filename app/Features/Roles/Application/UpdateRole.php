@@ -20,9 +20,9 @@ final class UpdateRole
             ]);
         }
 
-        if ($role->name === RoleTypes::USUARIO && $data['name'] !== $role->name) {
+        if (in_array($role->name, RoleTypes::fixedNames(), true) && $data['name'] !== $role->name) {
             throw ValidationException::withMessages([
-                'name' => 'El nombre del rol Usuario es fijo.',
+                'name' => 'El nombre de este rol del sistema es fijo.',
             ]);
         }
 

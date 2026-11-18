@@ -54,6 +54,18 @@ POST /api/auth/login
 { "nickname": "admin", "password": "admin", "device_name": "pixel" }
 ```
 
+## Cuidado
+
+Plantilla: `CheckInShift` y `ShiftController`.
+
+1. Permiso en `PermissionTypes` y en `PermissionHandler::permissionsForRole`.
+2. La Feature llama `CareScope` antes de leer o escribir. El paciente sale del turno, no de un id suelto.
+3. Varias filas relacionadas van en `DB::transaction`.
+4. Ruta dentro del grupo `auth:sanctum` de `routes/api.php`.
+5. Prueba en `tests/Feature/Care/CareApiTest.php`.
+
+Entrada y salida guardan hora y, si llegan, latitud, longitud y precisión. Cada tarea y cada incidencia dejan historial. El reporte pagina con `limit` y `offset`.
+
 ## Test
 
 `tests/Feature/Users/UserCrudTest.php`.

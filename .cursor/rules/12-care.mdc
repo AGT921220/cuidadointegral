@@ -1,0 +1,20 @@
+---
+description: Turnos, pacientes, tareas, bitácora, salud e incidencias de la app.
+globs: app/Features/Care/**/*.php,app/Http/Controllers/Api/{Shift,Patient,Care,Health,Incident}*.php,app/Models/{Patient,Shift,Care,Health,Incident}*.php
+alwaysApply: false
+---
+
+# Cuidado
+
+Referencia: `CareScope`, `CheckInShift`, `ReportIncident`, `SearchCareReports`.
+
+- Un cuidador opera el turno solo si `shifts.caregiver_id` es su usuario. Admin también.
+- Un familiar o supervisor consulta solo pacientes de `patient_links`.
+- La entrada exige turno no cancelado y sin `check_in_at`. La salida exige entrada y no admite otra salida.
+- Coordenadas opcionales. La geocerca corre solo si `care.geofence_meters` tiene valor y el turno tiene latitud y longitud.
+- Cada cambio de tarea es una fila nueva en `care_task_records`. No se pisa el registro anterior.
+- La bitácora la edita su autor o Admin. No hay borrado.
+- Salud valida formato y rango. No hay diagnóstico ni consejo médico.
+- La incidencia guarda `incident_events`. Cerrada no vuelve a cambiar. El aviso sale en `NotifyIncidentJob` hacia familiares y supervisores vinculados, por el mailer existente y un log.
+- No hay archivos adjuntos, mapas externos ni sincronización offline.
+- Alta de pacientes, vínculos, turnos y tareas: permisos `*.create`, sin pantalla.

@@ -1,6 +1,8 @@
 # Cuidado Integral
 
-Backend de la app móvil y panel de administración (usuarios, roles y login).
+Backend de la app móvil (turnos y cuidado) y panel de administración (usuarios, roles y login).
+
+`CARE_GEOFENCE_METERS` vacío deja la geocerca apagada. El correo de incidencias usa `MAIL_MAILER` (en local, `log`).
 
 ## Arranque local
 

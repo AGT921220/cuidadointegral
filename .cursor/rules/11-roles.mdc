@@ -10,7 +10,9 @@ Modelo Spatie `Role`, guard `web`. No hay tabla de roles propia.
 
 - Crear sincroniza permisos que existan en `PermissionTypes`.
 - `Admin` no se edita ni se elimina.
-- `Usuario` no se elimina y su nombre no cambia. Sus permisos sí se pueden ajustar.
+- `Usuario`, `Cuidador`, `Familiar` y `Supervisor` no se eliminan y su nombre no cambia.
+- Los permisos de `Usuario` se pueden ajustar. `roles:create` no los borra.
+- `roles:create` sincroniza Admin, Cuidador, Familiar y Supervisor.
 - Un rol con usuarios asignados no se elimina.
 - Orden del headers: `roles.id`, `roles.name`.
 

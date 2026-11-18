@@ -41,3 +41,13 @@ Estado: activo.
 PHP 8.4-fpm, MySQL 8.4 y Redis 8 en Compose. Staging no incluye MySQL y usa la red externa `appnetwork`. El contenedor PHP incluye `pdo_sqlite` para PHPUnit.
 
 Puertos de host: 8094 (nginx), 4334 (MySQL), 6384 (Redis), 8095 (phpMyAdmin).
+
+## ADR-007 — Dominio de cuidado en la API
+
+Estado: activo.
+
+Pacientes, vínculos, turnos, tareas, bitácora, signos y incidencias viven en `app/Features/Care`. No hay Policies ni pantallas. La autorización combina el permiso Spatie con `CareScope`.
+
+La geocerca es opcional (`CARE_GEOFENCE_METERS`). La ubicación se guarda en el turno y en `shift_locations`. No hay proveedor de mapas.
+
+Una incidencia se notifica con el mailer configurado y un log en la cola `notifications`. No hay canal push, SMS ni adjuntos. No hay sincronización offline.
